@@ -5,8 +5,8 @@
   },
   "include": [
     "./src",
-    ".eslintrc.cjs",
-    "jest.config.cjs"
+    "vitest.config.ts",
+    ".eslintrc.cjs"
   ],
   "exclude": [
     "**/node_modules/**",

@@ -1,4 +1,4 @@
-/*
+// /*
 export default class Container {
   #name: string;
 
@@ -12,7 +12,7 @@ export default class Container {
 }
 // */
 
-// /*
+/*
 export default class Container {
   accessor name: string;
 

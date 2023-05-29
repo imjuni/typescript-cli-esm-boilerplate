@@ -12,7 +12,7 @@ export default [
     input: 'src/cli.ts',
     output: {
       dir: 'dist',
-      format: 'cjs',
+      format: 'esm',
       banner: '#!/usr/bin/env node',
     },
     plugins: [

@@ -1,8 +1,8 @@
 import Container from '#modules/container.ts';
-import 'jest';
+import { describe, it } from 'vitest';
 
 describe('Container', () => {
-  test('pass', () => {
+  it('pass', () => {
     const c = new Container('hello');
     expect(c.name).toEqual('hello');
   });

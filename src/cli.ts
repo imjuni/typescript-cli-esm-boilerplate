@@ -1,12 +1,10 @@
 import Container from '#modules/container.ts';
-import logger from '#modules/logger.ts';
+import { consola as log } from 'consola';
 import { isError } from 'my-easy-fp';
 import { install as sourceMapSupportInstall } from 'source-map-support';
 import yargs from 'yargs';
 
 sourceMapSupportInstall();
-
-const log = logger();
 
 const parser = yargs(process.argv.slice(2));
 parser.option('-p', { describe: 'test' });
@@ -20,5 +18,5 @@ const handler = async () => {
 handler().catch((caught) => {
   const err = isError(caught, new Error('unknown error raised'));
   log.error(err.message);
-  log.error(err.stack);
+  log.error(err.stack ?? '');
 });
