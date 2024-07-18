@@ -4,18 +4,20 @@
   "description": "TypeScript cli esm boilerplate",
   "type": "module",
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "scripts": {
-    "dev": "wireit",
-    "test": "wireit",
-    "clean": "wireit",
-    "lint": "wireit",
-    "lint-staged": "wireit",
-    "build": "wireit",
-    "rollup:prod": "wireit",
-    "rollup:dev": "wireit",
-    "dd": "wireit",
+    "dev": "tsx src/cli.ts",
+    "preartifact": "pnpm run clean",
+    "artifact": "cross-env FORMAT=esm node .configs/esbuild.mjs",
+    "test": "vitest run --coverage",
+    "clean": "rimraf dist artifact",
+    "lint": "eslint --cache .",
+    "lint-staged": "lint-staged",
+    "build": "tsc --incremental --project tsconfig.prod.json",
+    "rollup:prod": "rollup --config ./.configs/rollup.config.prod.ts --configPlugin typescript",
+    "rollup:dev": "rollup --config ./.configs/rollup.config.dev.ts --configPlugin typescript",
+    "dd": "deps-diff md -d prod -d dev --title-list-type '*' --deps-list-type '*' --content-list-type '*'",
     "prepare": "husky install"
   },
   "repository": {
@@ -28,7 +30,7 @@
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
   "bin": {
-    "nozzle": "dist/cli.js"
+    "cli-esm": "dist/cli.js"
   },
   "imports": {
     "#modules/*": "./src/modules/*"
@@ -37,92 +39,57 @@
     "url": "https://github.com/imjuni/typescript-cli-boilerplate/issues"
   },
   "homepage": "https://github.com/imjuni/typescript-cli-boilerplate#readme",
-  "wireit": {
-    "dev": {
-      "command": "ts-node src/cli.ts"
-    },
-    "test": {
-      "command": "vitest run --coverage"
-    },
-    "clean": {
-      "command": "rimraf dist artifact"
-    },
-    "build": {
-      "command": "tsc --incremental --project tsconfig.prod.json"
-    },
-    "lint": {
-      "command": "eslint --cache ."
-    },
-    "rollup:dev": {
-      "command": "rollup --config ./.configs/rollup.config.dev.ts --configPlugin typescript",
-      "dependencies": [
-        "clean",
-        "lint"
-      ]
-    },
-    "dd": {
-      "command": "deps-diff md -d prod -d dev --title-list-type '*' --deps-list-type '*' --content-list-type '*'"
-    },
-    "lint-staged": {
-      "command": "lint-staged"
-    },
-    "rollup:prod": {
-      "command": "rollup --config ./.configs/rollup.config.prod.ts --configPlugin typescript",
-      "dependencies": [
-        "clean",
-        "lint"
-      ]
-    }
-  },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@rollup/plugin-terser": "^0.4.3",
-    "@rollup/plugin-typescript": "^11.1.1",
-    "@swc/core": "^1.3.64",
-    "@tsconfig/node16": "^1.0.4",
-    "@types/cli-progress": "^3.11.0",
-    "@types/node": "^20.3.1",
-    "@types/source-map-support": "^0.5.6",
-    "@types/yargs": "^17.0.24",
-    "@typescript-eslint/eslint-plugin": "^5.59.11",
-    "@typescript-eslint/parser": "^5.59.11",
-    "@vitest/coverage-v8": "^0.32.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/cli-progress": "^3.11.6",
+    "@types/node": "^20.14.11",
+    "@types/qs": "^6.9.15",
+    "@types/source-map-support": "^0.5.10",
+    "@types/yargs": "^17.0.31",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
+    "@vitest/coverage-v8": "^2.0.3",
     "cross-env": "^7.0.3",
     "deps-diff": "^1.0.2",
-    "eslint": "^8.42.0",
+    "esbuild": "^0.23.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsdoc": "^46.2.6",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsdoc": "^48.7.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-prettier": "^4.2.1",
-    "execa": "^7.1.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "prettier-eslint": "^15.0.1",
-    "prettier-plugin-organize-imports": "^3.2.2",
-    "read-pkg": "^8.0.0",
-    "rimraf": "^5.0.1",
-    "rollup": "^3.25.1",
-    "rollup-plugin-dts": "^5.3.0",
-    "rollup-plugin-swc3": "^0.8.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "execa": "^9.3.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier-eslint": "^16.1.2",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "read-pkg": "^9.0.1",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.18.1",
+    "rollup-plugin-dts": "^6.1.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "tslib": "^2.5.3",
-    "typescript": "^5.1.3",
-    "vitest": "^0.32.0",
-    "wireit": "^0.9.5"
+    "tslib": "^2.6.3",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.3"
   },
   "dependencies": {
-    "chalk": "^5.2.0",
+    "chalk": "^5.3.0",
     "cli-progress": "^3.12.0",
-    "consola": "^3.1.0",
-    "find-up": "^6.3.0",
-    "my-easy-fp": "^0.20.3",
-    "ora": "^6.3.1",
+    "consola": "^3.2.3",
+    "eta": "^3.1.1",
+    "fast-safe-stringify": "^2.1.1",
+    "find-up": "^7.0.0",
+    "my-easy-fp": "^0.22.0",
+    "ora": "^8.0.1",
+    "qs": "^6.12.3",
     "source-map-support": "^0.5.21",
+    "url-naong": "^1.3.0",
     "yargs": "^17.7.2"
   },
   "lint-staged": {

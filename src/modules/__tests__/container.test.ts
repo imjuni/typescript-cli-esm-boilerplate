@@ -1,5 +1,5 @@
-import Container from '#modules/container.ts';
-import { describe, it } from 'vitest';
+import { Container } from '#modules/container.js';
+import { describe, expect, it } from 'vitest';
 
 describe('Container', () => {
   it('pass', () => {

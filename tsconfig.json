@@ -1,6 +1,6 @@
 {
   // This is an alias to @tsconfig/node12: https://github.com/tsconfig/bases
-  "extends": "@tsconfig/node16/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
 
   // Most ts-node options can be specified here using their programmatic names.
   "ts-node": {
@@ -19,13 +19,13 @@
   "compilerOptions": {
     /* Basic Options */
     "declaration": true /* Generates corresponding '.d.ts' file. */,
-    "lib": ["DOM", "DOM.Iterable", "ES2020"],
     "declarationMap": true /* Generates corresponding '.d.ts' file. */,
     "sourceMap": true /* Generates corresponding '.map' file. */,
     "outDir": "./dist" /* Redirect output structure to the directory. */,
     "removeComments": true /* Do not emit comments to output. */,
     "importHelpers": true /* Import emit helpers from 'tslib'. */,
     "newLine": "lf",
+    "noEmit": true,
 
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,
@@ -38,8 +38,8 @@
     "noUncheckedIndexedAccess": true,
 
     /* Module Resolution Options */
-    "module": "ES2020",
-    "moduleResolution": "bundler" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
+    "module": "ES2022",
+    "moduleResolution": "Bundler" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
     "moduleDetection": "force",
     "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
     "rootDir": ".",
@@ -48,6 +48,8 @@
     /* Experimental Options */
     "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
+    // "allowImportingTsExtensions": false,
+
     "pretty": true
   },
   "include": ["src/**/*.ts"],
