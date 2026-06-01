@@ -1,14 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { defineConfig } from 'vitest/config';
+import { defaultExclude, defineConfig } from "vitest/config";
 
 export default defineConfig({
-  esbuild: { target: 'es2022' },
   test: {
     clearMocks: true,
     globals: true,
     typecheck: {
-      checker: 'tsc',
-      tsconfig: './tsconfig.json',
+      checker: "tsc",
+      tsconfig: "./tsconfig.json",
     },
+
+    exclude: [...defaultExclude, "dist/**", "artifact/**", ".configs/**"],
+  },
+  esbuild: {
+    target: "es2022", // 또는 "esnext"
   },
 });

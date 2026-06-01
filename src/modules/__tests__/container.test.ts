@@ -1,9 +1,9 @@
-import { Container } from '#modules/container.js';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from "vitest";
+import { Container } from "#modules/container.js";
 
-describe('Container', () => {
-  it('pass', () => {
-    const c = new Container('hello');
-    expect(c.name).toEqual('hello');
+describe("Container", () => {
+  it("pass", () => {
+    const c = new Container("hello");
+    expect(c.name).toEqual("hello");
   });
 });
