@@ -16,8 +16,7 @@ export const buildRun = async ({
   args,
   cmd,
 }: CommandContext<typeof buildArgs>) => {
-  const locale = args.language ?? getLocale();
-  i18n.locale(locale);
+  i18n.locale(args.language ?? getLocale());
 
   const { config: configFromFile } = await loadConfig({ name: "tceb" });
   const rawConfig = defu(args, configFromFile);

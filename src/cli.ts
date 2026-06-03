@@ -2,7 +2,6 @@ import { defineCommand, runMain } from "citty";
 import { install as sourceMapSupportInstall } from "source-map-support";
 import { buildArgs } from "#commands/buildArgs.js";
 import { buildRun } from "#commands/buildRun.js";
-import "rosetta";
 
 sourceMapSupportInstall();
 
