@@ -12,10 +12,7 @@ import { buildZod } from "#schema/build.zod.js";
 import { getBuildZodErrorMap } from "#schema/getBuildZodErrorMap.js";
 import type { buildArgs } from "./buildArgs.js";
 
-export const buildRun = async ({
-  args,
-  cmd,
-}: CommandContext<typeof buildArgs>) => {
+export const buildRun = async ({ args, cmd }: CommandContext<typeof buildArgs>) => {
   i18n.locale(args.language ?? getLocale());
 
   const { config: configFromFile } = await loadConfig({ name: "tceb" });
